@@ -1,0 +1,9 @@
+# Downloaded model assets and local inference binaries
+/models/
+/bin/
+/llama-b10621/
+/llama-b10621-bin-ubuntu-vulkan-x64.tar.gz
+
+# Python-generated files
+__pycache__/
+*.py[cod]
