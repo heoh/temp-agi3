@@ -17,18 +17,24 @@ from huggingface_hub import hf_hub_download
 
 
 REPO_ID = "lmstudio-community/Qwen3.5-9B-GGUF"
-FILENAME = "Qwen3.5-9B-Q4_K_M.gguf"
+FILENAMES = [
+    "Qwen3.5-9B-Q4_K_M.gguf",
+    "mmproj-Qwen3.5-9B-BF16.gguf",
+]
 LOCAL_DIR = Path("models")
 
 
 try:
-    path = hf_hub_download(
-        repo_id=REPO_ID,
-        filename=FILENAME,
-        local_dir=LOCAL_DIR,
-    )
+    paths = [
+        hf_hub_download(
+            repo_id=REPO_ID,
+            filename=filename,
+            local_dir=LOCAL_DIR,
+        )
+        for filename in FILENAMES
+    ]
 except Exception:
     traceback.print_exc()
     raise
 else:
-    print(path)
+    print("\n".join(paths))
