@@ -3,6 +3,7 @@
 /bin/
 /llama-b10621/
 /llama-b10621-bin-ubuntu-vulkan-x64.tar.gz
+/.local/
 
 # Python-generated files
 __pycache__/

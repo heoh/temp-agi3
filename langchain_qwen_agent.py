@@ -1,6 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # dependencies = [
+#   "httpx>=0.27",
 #   "langchain>=1.0",
 #   "langchain-openai>=1.0",
 # ]
@@ -10,6 +11,7 @@
 
 import os
 
+import httpx
 from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_openai import ChatOpenAI
@@ -26,6 +28,8 @@ model = ChatOpenAI(
     base_url=os.getenv("LLAMA_BASE_URL", "http://127.0.0.1:8080/v1"),
     api_key=os.getenv("LLAMA_API_KEY", "not-needed"),
     temperature=0,
+    # Keep local llama.cpp traffic off HTTP(S)_PROXY / ALL_PROXY.
+    http_client=httpx.Client(trust_env=False),
 )
 
 agent = create_agent(
